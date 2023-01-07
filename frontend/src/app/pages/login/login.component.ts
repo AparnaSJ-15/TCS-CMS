@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
        else{
         localStorage.setItem('token',this.id);
   
-        alert("Faculty has successfully logged in")
+        alert("User has successfully logged in")
   
         this.route.navigate(['/userhome'])
   
