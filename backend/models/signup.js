@@ -6,15 +6,19 @@ var signupSchema = new Schema({
     name:{
         type:String,
         // unique:true
+        required:true
     },
     email:{
-        type:String
+        type:String,
+        required:true
     },
     phonenumber:{
-        type:Number
+        type:Number,
+        required:true
     },
     password:{
-        type:String
+        type:String,
+        required:true
     }
    
 });

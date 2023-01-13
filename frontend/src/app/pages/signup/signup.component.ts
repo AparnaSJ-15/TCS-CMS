@@ -33,13 +33,12 @@ export class SignupComponent implements OnInit {
  
   onSubmit() {
     try{
-      console.log(this.user)
+      // console.log(this.user)
       this.loginservice.signup(this.user).subscribe(res=>{
         
         if(res.message){
           alert(res.message);
           this.route.navigate(['/signup']);
-  
         }else{
           alert("registered successfully");
           this.route.navigate(['/login']);
