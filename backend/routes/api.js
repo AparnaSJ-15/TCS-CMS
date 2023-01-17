@@ -1,8 +1,9 @@
-const express = require('express')
-const router = express.Router()
-const signupdata = require('../models/signup')
+const express = require('express');
+const router = express.Router();
+const signupdata = require('../models/signup');
 const jwt = require('jsonwebtoken');
-const verifyToken = require('../middlewares/verifytoken')
+const verifyToken = require('../middlewares/verifytoken');
+const contentDATA = require('../models/content')
 
 //signup
 router.post('/signup',async(req,res)=>{
@@ -32,6 +33,20 @@ console.log("test",req.body);
 
 })
 
+// get signup list
+router.get('/listsignup', async (req, res) => {
+
+    try{
+        const contents = await (await signupdata.find({'status':null}).sort({'createdAt':-1}));
+        res.status(200).send(contents);
+    }catch(error) {
+        res.status(400).send(error.message);
+    }
+
+})
+
+
+
 
 //login
 router.post('/login',async(req,res)=>{
@@ -60,6 +75,81 @@ router.post('/login',async(req,res)=>{
     
 })
 
+// full list read
+router.get('/listcontent', async (req, res) => {
 
+    try{
+        const contents = await contentDATA.find().sort({'createdAt':-1});
+        res.status(200).send(contents);
+    }catch(error) {
+        res.status(400).send(error.message);
+    }
+
+})
+
+// add
+router.post('/addcontent', async(req,res)=>{
+    console.log(req.body)
+    try {
+        const contents = new contentDATA({
+            title:req.body.title,
+            creator:req.body.creator,
+            category:req.body.category,
+            content:req.body.content
+        });
+        let savedData= await contents.save();
+        res.status(200).send(savedData);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+})
+
+// get single data
+
+router.get('/singlecontent/:id', async (req, res) => {
+
+    try{
+        let id = req.params.id;
+        const files = await contentDATA.findById(id);
+        res.status(200).send(files);
+    }catch(error) {
+        res.status(400).send(error.message);
+    }
+
+})
+
+// update
+
+router.put('/editcontent/:id', async(req,res)=>{
+    try {
+        let id=req.params.id
+        let item ={
+            title:req.body.title,
+            creator:req.body.creator,
+            category:req.body.category,
+            content:req.body.content
+        };
+        let update={
+            $set:item
+        }
+        const updateContent=await contentDATA.findByIdAndUpdate({'_id':id},update)
+        res.status(200).send(updateContent)
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+})
+
+// delete
+
+router.delete('/deletecontent/:id',async (req,res)=>{
+    try {
+        let id=req.params.id
+        const deleteContent= await contentDATA.findByIdAndDelete(id)
+        res.send(deleteContent)
+    } catch (error) {
+        console.log(error)
+        
+    } 
+})
 
 module.exports = router;

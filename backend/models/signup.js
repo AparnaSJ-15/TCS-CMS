@@ -18,9 +18,16 @@ var signupSchema = new Schema({
     },
     password:{
         type:String,
-        required:true
+        // required:true
+    },
+    createdAt:{
+        type: Date,
+        default:Date.now()
+    },
+    status:{
+        type:String,
+        default:null
     }
-   
 });
 
 var signupdata = mongoose.model('signup', signupSchema); 
