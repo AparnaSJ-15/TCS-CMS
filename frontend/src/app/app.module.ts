@@ -20,6 +20,12 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserHeaderComponent } from './components/user-header/user-header.component';
+import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
+import { AddPostComponent } from './pages/add-post/add-post.component';
+import { ApiService } from './api.service';
+import { EditPostComponent } from './pages/edit-post/edit-post.component';
+import { UserListComponent } from './pages/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +36,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     FooterComponent,
     AdminhomeComponent,
-    UserhomeComponent
+    UserhomeComponent,
+    UserHeaderComponent,
+    AdminHeaderComponent,
+    AddPostComponent,
+    EditPostComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +57,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatButtonModule,
     MatIconModule
   ],
-  providers: [LoginService,
+  providers: [LoginService,ApiService,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,
