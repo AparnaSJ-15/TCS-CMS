@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor,HttpRequest,HttpHandler,HttpEvent } from '@angular/common/http';
-import { LoginService } from './login.service';
+import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 })
 export class AuthInterceptorService implements HttpInterceptor{
 
-  constructor(private loginservice:LoginService) { }
+  constructor(private api:ApiService) { }
   intercept(req:HttpRequest<any>,nxt:HttpHandler): Observable<HttpEvent<any>> {
-    const token = this.loginservice.getUserToken()
+    const token = this.api.getUserToken()
     if (token) {
       req = req.clone({
         setHeaders: { Authorization: `${token}` }

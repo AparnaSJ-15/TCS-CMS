@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/login.service';
+import { ApiService } from 'src/app/api.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-login',
@@ -13,31 +14,34 @@ export class LoginComponent implements OnInit {
     email:"",
     password:""
   }
-  message:any
-  id:any
+  message:any;
+  id:any;
 
-  constructor(private loginservice:LoginService, private route:Router) { }
+
+  constructor(private api:ApiService, private route:Router) { }
 
   ngOnInit(): void {
   }
   loginUser(){
     try{
-    this.loginservice.login(this.user).subscribe(res=>{
+    this.api.login(this.user).subscribe(res=>{
        if(res.message){
         alert(res.message)
       }
-     else  if (res.email == "admin1234@gmail.com" && res.password =="Admin@1234" ){
+      else  if (res.email == "admin1234@gmail.com" && res.password =="Admin@1234" ){
       localStorage.setItem('token',this.id);
-  
-        alert("Admin has successfully logged in")
+
+        alert("Root user has successfully logged in")
         this.route.navigate(['/adminhome'])
-  
+       }
+       else if (res.email == "theertha@gmail.com" && res.password == "Theertha@1234" || res.email == "rahul12@gmail.com" && res.password == "Rahul@1234"){
+        alert("Admin has successfully logged in")
+        this.route.navigate(['/userAdmin'])
        }
        else{
         localStorage.setItem('token',this.id);
-  
+
         alert("User has successfully logged in")
-  
         this.route.navigate(['/userhome'])
   
        }
@@ -47,5 +51,4 @@ catch(error){
   console.log(error)
 }
   }
-
 }

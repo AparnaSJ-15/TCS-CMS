@@ -1,4 +1,5 @@
 <app-user-header></app-user-header>
+<br><br>
 <form [formGroup]="addpostform" (ngSubmit)="onSubmit()">
 <div class="container">
     <div class="headpost">
@@ -13,6 +14,10 @@
       <input type="text" class="form-control" id="inputAddress2" placeholder="Enter your Name" formControlName="creator" required>
     </div>&nbsp;
     <div class="form-group">
+      <label for="inputAddress2">Category</label>
+      <input type="text" class="form-control" id="inputAddress2" placeholder="Enter category for category list" formControlName="category" required>
+    </div>&nbsp;
+    <!-- <div class="form-group">
         <label for="inputState">Category</label>
         <select id="inputState" class="form-control" formControlName="category" required>
           <option selected>Choose...</option>
@@ -22,7 +27,7 @@
           <option>Current Affairs</option>
           <option>Entertainment</option>
         </select>
-      </div>&nbsp;
+      </div>&nbsp; -->
       <div class="form-group">
         <label for="exampleFormControlTextarea1">Content</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" formControlName="content" required></textarea>

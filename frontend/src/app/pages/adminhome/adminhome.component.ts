@@ -11,6 +11,7 @@ export class AdminhomeComponent implements OnInit {
 
   constructor(private api : ApiService,private router: Router) { }
   posts:any=[];
+  searchText:any;
 
   ngOnInit(): void {
     this.getData();
@@ -27,7 +28,7 @@ export class AdminhomeComponent implements OnInit {
 
 
   editPost(id: any){
-    this.router.navigate(['/editpost'],
+    this.router.navigate(['/rootEdit'],
     {queryParams:{selected:id}}
     )
   }

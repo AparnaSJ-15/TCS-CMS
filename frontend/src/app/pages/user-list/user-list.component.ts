@@ -8,7 +8,8 @@ import { ApiService } from 'src/app/api.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  signups:any=[]
+  signups:any=[];
+  id:any;
   constructor(private api:ApiService, private router:Router) { }
 
   ngOnInit(): void {
@@ -17,6 +18,18 @@ export class UserListComponent implements OnInit {
   getData(){
     this.api.getSignupList().subscribe(res=>{
       this.signups = res;
+    })
+  }
+
+  refresh(): void {
+    window.location.reload();
+  }
+
+  updateAdmin(id:any){
+    let data ={"_id":id,"status":"admin"}
+    this.api.editstatus(data).subscribe(res=>{
+      alert('Successfully changed user to admin')
+      this.refresh();
     })
   }
 

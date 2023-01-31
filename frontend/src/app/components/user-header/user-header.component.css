@@ -6,8 +6,9 @@
     margin-right: 5px;
     font-size: large;
 }
-.nav-item a:hover{
-    /* text-decoration: overline; */
-    color: aqua
-    /* background-color: palevioletred; */
+
+.active {
+    background-color: rgb(127, 191, 255);
+    /* border-radius: 15px; */
+    font-weight: bool;
 }

@@ -1,5 +1,11 @@
 <app-admin-header></app-admin-header>
-<div class="container pt-5 table-responsive" style="margin-top: 2cm;">
+<br><br><br>
+<nav class="navbar bg-body-tertiary ">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">Users List</span>
+    </div>
+  </nav>
+<div class="container pt-5 table-responsive" style="margin-top: 0.5cm;">
     <table class="table table-info table-striped">
         <thead>
           <tr class="table-dark" style="text-align: center ;">
@@ -18,7 +24,7 @@
               <td>{{signup.phonenumber}}</td>
               <td>
                 <!-- HTML !-->
-                <button class="button-62" role="button">Set as Admin</button>
+                <button class="button-62" role="button" (click)="updateAdmin(signup._id)">Set as Admin</button>
               </td>
             </tr>
           </tbody>

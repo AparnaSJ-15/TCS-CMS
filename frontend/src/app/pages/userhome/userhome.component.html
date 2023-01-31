@@ -39,7 +39,10 @@
   </div>
 
 <div class="container pt-5">
-  <div class="card mb-4" *ngFor="let post of posts">
+  <div class="form-group">
+    <input type="text"name='searchText' placeholder="Search" [(ngModel)]="searchText" style="width: 100% ; height: 2.5em;">
+  </div><br>
+  <div class="card mb-4" *ngFor="let post of posts |filter:searchText">
     <div class="card-body">
       <h4 style="color: grey;">Title: {{post.title}}</h4>
       <i style="color: grey;">Created by: {{post.creator}}, Category: {{post.category}}, Created on: {{post.createdAt | date}}</i>

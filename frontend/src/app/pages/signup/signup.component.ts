@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/login.service';
+import { ApiService } from 'src/app/api.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,8 +16,9 @@ export class SignupComponent implements OnInit {
     'password': "",
   }
  message:any;
+ 
 
-  constructor(private loginservice:LoginService,private route:Router) { }
+  constructor(private api:ApiService,private route:Router) { }
 
   ngOnInit(): void {
   }
@@ -30,11 +31,14 @@ export class SignupComponent implements OnInit {
       event.preventDefault();
     }
   }
+
+  //show password
+
  
   onSubmit() {
     try{
       // console.log(this.user)
-      this.loginservice.signup(this.user).subscribe(res=>{
+      this.api.signup(this.user).subscribe(res=>{
         
         if(res.message){
           alert(res.message);

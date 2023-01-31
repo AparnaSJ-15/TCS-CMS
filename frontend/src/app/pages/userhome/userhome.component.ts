@@ -11,6 +11,7 @@ export class UserhomeComponent implements OnInit {
 
   constructor(private api : ApiService,private router: Router) { }
   posts:any=[];
+  searchText:any;
 
   ngOnInit(): void {
     this.getData();
