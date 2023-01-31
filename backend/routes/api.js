@@ -3,7 +3,8 @@ const router = express.Router();
 const signupdata = require('../models/signup');
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../middlewares/verifytoken');
-const contentDATA = require('../models/content')
+const contentDATA = require('../models/content');
+const categoryDATA = require('../models/category');
 
 //signup
 router.post('/signup',async(req,res)=>{
@@ -13,7 +14,8 @@ router.post('/signup',async(req,res)=>{
     name: req.body.name,
     email: req.body.email,
     phonenumber: req.body.phonenumber,
-    password: req.body.password
+    password: req.body.password,
+    status: req.body.status
 
 }    
 
@@ -38,6 +40,17 @@ router.get('/listsignup', async (req, res) => {
 
     try{
         const contents = await (await signupdata.find({'status':null}).sort({'createdAt':-1}));
+        res.status(200).send(contents);
+    }catch(error) {
+        res.status(400).send(error.message);
+    }
+
+})
+// get list of admin 
+router.get('/listsignupadmin', async (req, res) => {
+
+    try{
+        const contents = await (await signupdata.find({'status':'admin'}).sort({'createdAt':-1}));
         res.status(200).send(contents);
     }catch(error) {
         res.status(400).send(error.message);
@@ -151,5 +164,108 @@ router.delete('/deletecontent/:id',async (req,res)=>{
         
     } 
 })
+// status changed to admin
+router.put('/statusupdate', async (req, res) => {
+    let id = req.body._id
+    let item = {  //to fetch and save data from front end in server
+        status: req.body.status,
+
+    }
+    let updateData = { $set: item }
+
+    await signupdata.findOneAndUpdate({ _id: id }, updateData)
+
+    res.json();
+})
+
+//status changed to user
+router.put('/statusupdateUser', async (req, res) => {
+    let id = req.body._id
+    let item = {  //to fetch and save data from front end in server
+        status: req.body.status,
+
+    }
+    let updateData = { $set: item }
+
+    await signupdata.findOneAndUpdate({ _id: id }, updateData)
+
+    res.json();
+})
+
+// category list all
+router.get('/listcategory', async (req, res) => {
+
+    try{
+        const categorys = await categoryDATA.find().sort({'date':-1});
+        res.status(200).send(categorys);
+    }catch(error) {
+        res.status(400).send(error.message);
+    }
+
+})
+
+// add category
+router.post('/addcategory', async(req,res)=>{
+    console.log(req.body)
+    try {
+        const contents = new categoryDATA({
+            name:req.body.name,
+            description:req.body.description,
+            date:req.body.date
+        });
+        let savedData= await contents.save();
+        res.status(200).send(savedData);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+})
+
+// get single list
+router.get('/singlecategory/:id', async (req, res) => {
+
+    try{
+        let id = req.params.id;
+        const files = await categoryDATA.findById(id);
+        res.status(200).send(files);
+    }catch(error) {
+        res.status(400).send(error.message);
+    }
+
+})
+
+// update category
+
+router.put('/editcategory/:id', async(req,res)=>{
+    try {
+        let id=req.params.id
+        let item ={
+            name:req.body.name,
+            description:req.body.description,
+            date:req.body.date
+        };
+        let update={
+            $set:item
+        }
+        const updateCategory=await categoryDATA.findByIdAndUpdate({'_id':id},update)
+        res.status(200).send(updateCategory)
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+})
+
+// delete category
+
+router.delete('/deletecategory/:id',async (req,res)=>{
+    try {
+        let id=req.params.id
+        const deleteCategory= await categoryDATA.findByIdAndDelete(id)
+        res.send(deleteCategory)
+    } catch (error) {
+        console.log(error)
+        
+    } 
+})
+
+
 
 module.exports = router;
