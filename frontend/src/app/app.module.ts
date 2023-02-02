@@ -37,6 +37,7 @@ import { UserAdminCategoryComponent } from './pages/user-admin-category/user-adm
 import { RootEditComponent } from './pages/root-edit/root-edit.component';
 import { AdminEditComponent } from './pages/admin-edit/admin-edit.component';
 import { AdminEditCategoryComponent } from './pages/admin-edit-category/admin-edit-category.component';
+import { AdminaddcategoryComponent } from './pages/adminaddcategory/adminaddcategory.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { AdminEditCategoryComponent } from './pages/admin-edit-category/admin-ed
     UserAdminCategoryComponent,
     RootEditComponent,
     AdminEditComponent,
-    AdminEditCategoryComponent
+    AdminEditCategoryComponent,
+    AdminaddcategoryComponent
   ],
   imports: [
     BrowserModule,

@@ -25,7 +25,7 @@ export class UserAdminCategoryComponent implements OnInit {
   }
 
   addcategory(){
-    this.router.navigate(['/addcategory']);
+    this.router.navigate(['/adminAddCategory']);
   }
 
   updatecategory(id:any){

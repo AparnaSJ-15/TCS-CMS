@@ -19,6 +19,7 @@ import { UserAdminCategoryComponent } from './pages/user-admin-category/user-adm
 import { RootEditComponent } from './pages/root-edit/root-edit.component';
 import { AdminEditComponent } from './pages/admin-edit/admin-edit.component';
 import { AdminEditCategoryComponent } from './pages/admin-edit-category/admin-edit-category.component';
+import { AdminaddcategoryComponent } from './pages/adminaddcategory/adminaddcategory.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -38,7 +39,8 @@ const routes: Routes = [
   {path:'userAdminCategory',component:UserAdminCategoryComponent},
   {path:'rootEdit',component:RootEditComponent},
   {path:'adminEdit',component:AdminEditComponent},
-  {path:'adminEditCategory',component:AdminEditCategoryComponent}
+  {path:'adminEditCategory',component:AdminEditCategoryComponent},
+  {path:"adminAddCategory",component:AdminaddcategoryComponent}
 ];
 
 @NgModule({
